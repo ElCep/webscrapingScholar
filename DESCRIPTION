@@ -1,0 +1,19 @@
+Package: webscrapingScholar
+Title: webscraping google scholar ref
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Etienne",
+           family = "Delay",
+           role = c("aut", "cre"),
+           email = "etienne.delay@gmail.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: provide functions to help harvest data (paper titles, authors' names, referring URLs, number of citations) in google scholar. The idea is tu use it in social network analysis.
+Depends: R (>= 3.4)
+Imports: rvest, xml2, stringr
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

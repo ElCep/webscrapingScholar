@@ -1,0 +1,47 @@
+---
+title: "comment-utiliser-mon-package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{comment-utiliser-mon-package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Pour charger le package 
+```{r setup}
+library(webscrapingScholar)
+```
+
+Définir le point de départ de votre recherche. Ici le célèbre papier de Daré et Barreteau, 2003, A role-playing game in irrigated system negotiation: between play and reality, JASSS.
+```{r, eval = FALSE}
+scrape.startingPoint <- page_scrape("https://scholar.google.fr/scholar?q=A+role-playing+game+in+irrigated+system+negotiation%3A+between+play+and+reality")
+
+```
+
+
+On peut ensuite itérer sur cette ressource pour chercher qui l'as citer 
+
+```{r, eval = FALSE}
+scrape.p2 <- page_scrape(as.character(scrape.startingPoint$ref.link[1]))
+
+
+timer <- 20
+i <- 1
+## temps que le dernier élément de la colonne "my.next.l" n'est pas google scholar
+## ou qu'on est pas arrivé au timer la boucle tourne
+while (tail(scrape.p2$my.next.l, n=1) != "https://scholar.google.fr" && i <= timer){
+  p.next <- tail(scrape.p2$my.next.l, n=1) #recuperation de l'URl de la page suivante
+  p.act <- page_scrape(as.character(p.next)) # scrape de la page
+  scrape.p2 <- rbind(scrape.p2, p.act) #coller la page au tableau de donnée
+  Sys.sleep(2.5)
+  i <- i+1
+}
+```
+
