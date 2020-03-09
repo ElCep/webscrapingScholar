@@ -14,6 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+Pour installer le package depuis github si ce n'est pas déjà fait
+```{r setup}
+devtools::install_github("ElCep/webscrapingScholar")
+```
+
+
+
 Pour charger le package 
 ```{r setup}
 library(webscrapingScholar)
@@ -29,7 +36,7 @@ scrape.startingPoint <- page_scrape("https://scholar.google.fr/scholar?q=A+role-
 On peut ensuite itérer sur cette ressource pour chercher qui l'as citer 
 
 ```{r, eval = FALSE}
-scrape.p2 <- page_scrape(as.character(scrape.startingPoint$ref.link[1]))
+scrape.p2 <- scrape.p2 <- page_scrape(paste0("https://scholar.google.fr",as.character(scrape.startingPoint$ref.link[1])))
 
 
 timer <- 20
@@ -43,5 +50,7 @@ while (tail(scrape.p2$my.next.l, n=1) != "https://scholar.google.fr" && i <= tim
   Sys.sleep(2.5)
   i <- i+1
 }
+
+write.csv(scrape.p2, "~/ggsr_dare.csv", row.names = F)
 ```
 

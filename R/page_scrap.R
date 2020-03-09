@@ -14,7 +14,7 @@ page_scrape <- function(scholarURL) {
   ## cela retourne un data frame
 
   ## TEST URL
-  scholarURL <- "https://scholar.google.fr/scholar?hl=fr&as_sdt=0%2C5&q=A+role-playing+game+in+irrigated+system+negotiation%3A+between+play+and+reality&btnG="
+  # scholarURL <- "https://scholar.google.fr/scholar?hl=fr&as_sdt=0%2C5&q=A+role-playing+game+in+irrigated+system+negotiation%3A+between+play+and+reality&btnG="
 
   ## Each object of the class "gs_ri" contains a reference to a document found by google scholar
   ## it creates a list of several objects
